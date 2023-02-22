@@ -1,17 +1,30 @@
 import React from 'react';
-import ReactDOM from 'react-dom/client';
+import ReactDOM from "react-dom";
+import { BrowserRouter } from "react-router-dom";
 import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
+// __ __ Components/Helpers __ __ //
+import { Provider } from 'react-redux';
+import { store } from './store/store';
+import ErrorBoundary from './hoc/ErrorBoundary';
+import * as serviceWorker from "./serviceWorker";
+import App from './App';
+
+ReactDOM.render(
+  <Provider store={store}>
+    <ErrorBoundary>
+      <React.StrictMode>
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
+      </React.StrictMode>
+    </ErrorBoundary>
+
+  </Provider>,
+
+  document.getElementById("root")
 );
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+// If you want your app to work offline and load faster, you can change
+// unregister() to register() below. Note this comes with some pitfalls.
+// serviceWorker.unregister();
